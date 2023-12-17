@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="《C++ Primer》第五版习题个人答案说明 仅个人记录学习过程所用，习题答案及排版可能部分与其他作者雷同，如有错误及侵权，欢迎邮箱联系我处理。 编译器是VS Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ Primer personal answer chapter01">
+<meta property="og:url" content="http://example.com/2023/12/17/C++primer01/index.html">
+<meta property="og:site_name" content="東冬的个人博客">
+<meta property="og:description" content="《C++ Primer》第五版习题个人答案说明 仅个人记录学习过程所用，习题答案及排版可能部分与其他作者雷同，如有错误及侵权，欢迎邮箱联系我处理。 编译器是VS Code">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pic.eastwinters.com/202312161905523.png">
+<meta property="og:image" content="http://pic.eastwinters.com/202312170913191.png">
+<meta property="og:image" content="http://pic.eastwinters.com/202312170913877.png">
+<meta property="og:image" content="http://pic.eastwinters.com/202312171257232.png">
+<meta property="article:published_time" content="2023-12-17T05:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-17T05:11:06.560Z">
+<meta property="article:author" content="EastWinters">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pic.eastwinters.com/202312161905523.png">
+
+<link rel="canonical" href="http://example.com/2023/12/17/C++primer01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++ Primer personal answer chapter01 | 東冬的个人博客</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5a08547d8727bdbe008d68b9f8ff7971";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">東冬的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">A personal blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/17/C++primer01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://pic.eastwinters.com/202308201654172.jpg">
+      <meta itemprop="name" content="EastWinters">
+      <meta itemprop="description" content="西边出现了阳光，这辈子第一次看到了外面的世界。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="東冬的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++ Primer personal answer chapter01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-17 13:00:00 / 修改时间：13:11:06" itemprop="dateCreated datePublished" datetime="2023-12-17T13:00:00+08:00">2023-12-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="《C-Primer》第五版习题个人答案"><a href="#《C-Primer》第五版习题个人答案" class="headerlink" title="《C++ Primer》第五版习题个人答案"></a>《C++ Primer》第五版习题个人答案</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li>仅个人记录学习过程所用，习题答案及排版可能部分与其他作者雷同，如有错误及侵权，欢迎邮箱联系我处理。</li>
+<li>编译器是VS Code<span id="more"></span></li>
+</ul>
+<h3 id="练习1-1"><a href="#练习1-1" class="headerlink" title="练习1.1"></a>练习1.1</h3><blockquote>
+<p>查阅你使用的编译器文档，确定它所使用的文件命名约定。编译并运行第2页的main程序。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/cpp/cpp-ide">在 Visual Studio Code 中编辑 C++</a></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h3><blockquote>
+<p>改写程序，让它返回-1。返回值-1通常被当作程序错误的标识。重新编译并运行你的程序，观察你的系统如何处理main返回的错误标识。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>和1.1结果相同，win11系统不处理或报告程序返回的错误标识。</p>
+<h3 id="练习1-3"><a href="#练习1-3" class="headerlink" title="练习1.3"></a>练习1.3</h3><blockquote>
+<p>编写程序，在标准输出上打印 Hello, World。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout&lt;&lt;<span class="string">&quot;Hello World&quot;</span>&lt;&lt;std::end1;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-4"><a href="#练习1-4" class="headerlink" title="练习1.4"></a>练习1.4</h3><blockquote>
+<p>我们的程序使用加法运算符+来将两个数相加。编写程序使用乘法运算符*，来打印两个数的积。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	<span class="type">int</span> v1 = <span class="number">1</span>, v2 = <span class="number">1</span>;</span><br><span class="line">	std::cin &gt;&gt; v1 &gt;&gt; v2;</span><br><span class="line">	std::cout &lt;&lt; v1 &lt;&lt;  <span class="string">&quot; multiplied by &quot;</span>&lt;&lt; v2</span><br><span class="line">            &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 * v2 &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-5"><a href="#练习1-5" class="headerlink" title="练习1.5"></a>练习1.5</h3><blockquote>
+<p>我们将所有输出操作放在一条很长的语句中。重写程序，将每个运算对象的打印操作放在一条独立的语句中。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	<span class="type">int</span> v1 = <span class="number">1</span>, v2 = <span class="number">1</span>;</span><br><span class="line">	std::cin&gt;&gt;v1&gt;&gt;v2;</span><br><span class="line">    std::cout&lt;&lt;v1;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot; multiplied by &quot;</span>;</span><br><span class="line">    std::cout&lt;&lt;v2;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot; is &quot;</span>;</span><br><span class="line">    std::cout&lt;&lt;v1 * v2 &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-6"><a href="#练习1-6" class="headerlink" title="练习1.6"></a>练习1.6</h3><blockquote>
+<p>解释下面程序片段是否合法。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::cout &lt;&lt; &quot;The sum of &quot; &lt;&lt; v1;</span><br><span class="line">		  &lt;&lt; &quot; and &quot; &lt;&lt; v2;</span><br><span class="line">		  &lt;&lt; &quot; is &quot; &lt;&lt; v1 + v2 &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<p>如果程序是合法的，它的输出是什么？如果程序不合法，原因何在？应该如何修正？</p>
+<p>不合法。<br><strong>原因：分号将完整的输出语句分割，导致语法不完整。</strong><br>修正：移除掉多余的分号，或在句子前面添加std::cout。</p>
+<h3 id="练习1-7"><a href="#练习1-7" class="headerlink" title="练习1.7"></a>练习1.7</h3><blockquote>
+<p>编译一个包含不正确的嵌套注释的程序，观察编译器返回的错误信息。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout&lt;&lt;<span class="string">&quot;Hello World&quot;</span>&lt;&lt;std::end1;<span class="comment">/*</span></span><br><span class="line"><span class="comment">*   正确注释</span></span><br><span class="line"><span class="comment">	/* 注释里嵌套注释是错误的 */</span></span><br><span class="line">*/</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>编译器错误信息：</p>
+<p><img src="http://pic.eastwinters.com/202312161905523.png" alt="编译器错误信息"></p>
+<h3 id="练习1-8"><a href="#练习1-8" class="headerlink" title="练习1.8"></a>练习1.8</h3><blockquote>
+<p>指出下列哪些输出语句是合法的(如果有的话)：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std::cout &lt;&lt; <span class="string">&quot;/*&quot;</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;*/&quot;</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="comment">/* &quot;*/</span><span class="string">&quot; */;</span></span><br><span class="line"><span class="string">std::cout &lt;&lt; /* &quot;</span>*/<span class="string">&quot; /* &quot;</span><span class="comment">/*&quot; */</span>;</span><br></pre></td></tr></table></figure>
+<p>预测编译这些语句会产生什么样的结果，实际编译这些语句来验证你的答案(编写一个小程序，每次将上述一条语句作为其主体)，改正每个编译错误。</p>
+<p>第三行编译出错，改正方法是增加一个引号。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;/*&quot;</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;*/&quot;</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="comment">/* &quot;*/</span><span class="string">&quot; */&quot;</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="comment">/* &quot;*/</span><span class="string">&quot; /* &quot;</span><span class="comment">/*&quot; */</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**/ */ /*</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-9"><a href="#练习1-9" class="headerlink" title="练习1.9"></a>练习1.9</h3><blockquote>
+<p>编写程序，使用while循环将50到100的整数相加。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>, val=<span class="number">50</span>;</span><br><span class="line">    <span class="keyword">while</span>(val&lt;=<span class="number">100</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sum +=val;</span><br><span class="line">        ++val;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;Sum of 50 to 100 inclusive is&quot;</span>&lt;&lt;sum&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-10"><a href="#练习1-10" class="headerlink" title="练习1.10"></a>练习1.10</h3><blockquote>
+<p>除了++运算符将运算对象的值增加1之外，还有一个递减运算符（–）实现将值减少1。编写程序，使用递减运算符在循环中按递减顺序打印出10到0之间的整数。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a=<span class="number">0</span>,val=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">while</span> (val&gt;=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        a=val;</span><br><span class="line">        --val;</span><br><span class="line">        std::cout&lt;&lt;a&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-11"><a href="#练习1-11" class="headerlink" title="练习1.11"></a>练习1.11</h3><blockquote>
+<p>编写程序，提示用户输入两个整数，打印出这两个整数所指定的范围内的所有整数。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;please input two numbers:&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    std::cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="type">int</span> min = std::<span class="built_in">min</span>(a,b);</span><br><span class="line">    <span class="type">int</span> max = std::<span class="built_in">max</span>(a,b);</span><br><span class="line">    <span class="keyword">while</span> (max&gt;=min)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout&lt;&lt;max&lt;&lt;std::endl;</span><br><span class="line">        max--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-12"><a href="#练习1-12" class="headerlink" title="练习1.12"></a>练习1.12</h3><blockquote>
+<p>下面的for循环完成了什么功能？sum的终值是多少？</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int sum = 0;</span><br><span class="line">for (int i = -100; i &lt;= 100; ++i)</span><br><span class="line">	sum += i;</span><br></pre></td></tr></table></figure>
+
+<p>功能是将从-100到100之间的所有整数累加到变量sum中，sum 的终值为 0。</p>
+<h3 id="练习1-13"><a href="#练习1-13" class="headerlink" title="练习1.13"></a>练习1.13</h3><blockquote>
+<p>使用for循环重做1.4.1节中的所有练习（第11页）。</p>
+</blockquote>
+<p>exercise1.9:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">50</span>; i &lt;= <span class="number">100</span>; ++i) </span><br><span class="line">    &#123;sum += i;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;the sum is: &quot;</span> &lt;&lt; sum &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>exercise1.10:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="type">int</span> i = <span class="number">10</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">&#123;</span><br><span class="line">    std::cout&lt;&lt;i&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>exercise1.11:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;please input two numbers:&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    std::cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="type">int</span> min = std::<span class="built_in">min</span>(a,b);</span><br><span class="line">    <span class="type">int</span> max = std::<span class="built_in">max</span>(a,b);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = max; i &gt;= min; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout&lt;&lt;i&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-14"><a href="#练习1-14" class="headerlink" title="练习1.14"></a>练习1.14</h3><blockquote>
+<p>对比for循环和while循环，两种形式的优缺点各是什么？</p>
+</blockquote>
+<p>for循环语法简单明了，易于理解和维护；不适用于无限循环或循环次数不确定的情况，因为循环次数需要在循环开始前就确定。<br>while循环适用于循环次数不确定的情况，可以根据条件动态控制循环的执行；语法相对复杂，循环的初始化和迭代语句需要循环体外部定义，可读性稍差且容易出现死循环。</p>
+<h3 id="练习1-15"><a href="#练习1-15" class="headerlink" title="练习1.15"></a>练习1.15</h3><blockquote>
+<p>编写程序，包含第14页“再探编译”中讨论的常见错误。熟悉编译器生成的错误信息。</p>
+</blockquote>
+<p>常见的错误有语法错误、类型错误、声明错误，这些都是编译器可以检查出的错误。</p>
+<h3 id="练习1-16"><a href="#练习1-16" class="headerlink" title="练习1.16"></a>练习1.16</h3><blockquote>
+<p>编写程序，从cin读取一组数，输出其和。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//读取数据直到文件尾，计算所有读入的值的和</span></span><br><span class="line">	<span class="keyword">while</span> (std::cin &gt;&gt; value)</span><br><span class="line">	&#123;</span><br><span class="line">		sum += value;<span class="comment">//等价于sum=sum+value</span></span><br><span class="line">	&#125;</span><br><span class="line">	std::cout &lt;&lt;<span class="string">&quot;Sum is&quot;</span>&lt;&lt; sum &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="练习1-17"><a href="#练习1-17" class="headerlink" title="练习1.17"></a>练习1.17</h3><blockquote>
+<p>如果输入的所有值都是相等的，本节的程序会输出什么？如果没有重复值，输出又会是怎样的？</p>
+</blockquote>
+<p><img src="http://pic.eastwinters.com/202312170913191.png" alt="练习1.17" title="练习1.17 图1"><br><img src="http://pic.eastwinters.com/202312170913877.png" alt="练习1.17" title="练习1.17 图2"></p>
+<h3 id="练习1-18"><a href="#练习1-18" class="headerlink" title="练习1.18"></a>练习1.18</h3><blockquote>
+<p>编译并运行本节的程序，给它输入全都相等的值。再次运行程序，输入没有重复的值。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//currVal是我们正在统计的数；我们将读入的新值存入val</span></span><br><span class="line">    <span class="type">int</span> currVal =<span class="number">0</span>,val=<span class="number">0</span>;<span class="comment">//读取第一个数，并确保确实有数据可以处理</span></span><br><span class="line">    <span class="keyword">if</span> (std::cin&gt;&gt;currVal)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> cnt =<span class="number">1</span>;<span class="comment">//保存我们正在处理的当前值的个数</span></span><br><span class="line">        <span class="keyword">while</span> (std::cin&gt;&gt;val)<span class="comment">//读取剩余的数</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (val==currVal)<span class="comment">//如果值相同</span></span><br><span class="line">            &#123;</span><br><span class="line">                ++cnt;<span class="comment">//将cnt加一</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;<span class="comment">//否则打印前一个值的数</span></span><br><span class="line">                std::cout&lt;&lt;currVal&lt;&lt;<span class="string">&quot; occurs &quot;</span>&lt;&lt;cnt&lt;&lt;<span class="string">&quot; times&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                currVal=val;<span class="comment">//记住新值</span></span><br><span class="line">                cnt=<span class="number">1</span>;<span class="comment">//重置计数器</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;<span class="comment">//while在这里结束</span></span><br><span class="line">        <span class="comment">//记住打印文件中的最后一个值的个数</span></span><br><span class="line">        std::cout&lt;&lt;currVal&lt;&lt;<span class="string">&quot; occurs &quot;</span>&lt;&lt;cnt&lt;&lt;<span class="string">&quot; times&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    &#125;<span class="comment">//最外层的if语句在这里结束</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>键入9个9，输出结果如练习1.17图1所示。</p>
+<h3 id="练习1-19"><a href="#练习1-19" class="headerlink" title="练习1.19"></a>练习1.19</h3><blockquote>
+<p>修改你为1.4.1节练习1.11（第11页）所编写的程序（打印一个范围内的数），使其能处理用户输入的第一个数比第二个数小的情况。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;please input two numbers:&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    std::cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="keyword">if</span> (a&lt;=b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (a&lt;=b)</span><br><span class="line">        &#123;</span><br><span class="line">        std::cout&lt;&lt;a&lt;&lt;std::endl;</span><br><span class="line">        a++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;<span class="keyword">while</span> (a&gt;=b)</span><br><span class="line">        &#123;</span><br><span class="line">        std::cout&lt;&lt;a&lt;&lt;std::endl;</span><br><span class="line">        a--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-20"><a href="#练习1-20" class="headerlink" title="练习1.20"></a>练习1.20</h3><blockquote>
+<p>在网站<a target="_blank" rel="noopener" href="http://www.informit.com/title/032174113">http://www.informit.com/title/032174113</a> 上，第1章的代码目录包含了头文件 Sales_item.h。将它拷贝到你自己的工作目录中。用它编写一个程序，读取一组书籍销售记录，将每条记录打印到标准输出上。</p>
+</blockquote>
+<p><strong>还需要将下载文件中的Version_test.h加入到练习代码目录</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iotream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;Sales_item.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_item book;</span><br><span class="line">    <span class="comment">//读入ISBN号、售出的册数及销售价格</span></span><br><span class="line">    std::cin&gt;&gt;book;</span><br><span class="line">    <span class="comment">//写入ISBN号、售出的册数、总销售额和平均价格</span></span><br><span class="line">    std::cout&lt;&lt;book&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习1-21"><a href="#练习1-21" class="headerlink" title="练习1.21"></a>练习1.21</h3><blockquote>
+<p>编写程序，读取两个 ISBN 相同的 Sales_item 对象，输出他们的和。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;Sales_item.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_item item1 item2;</span><br><span class="line">    std::cin&gt;&gt;item1&gt;&gt;item2;</span><br><span class="line">    std::cout&lt;&lt;item1+item2&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="练习1-22"><a href="#练习1-22" class="headerlink" title="练习1.22"></a>练习1.22</h3><blockquote>
+<p>编写程序，读取多个具有相同 ISBN 的销售记录，输出所有记录的和。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Sales_item.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Sales_item total;<span class="comment">//保存下一条交易记录的变量</span></span><br><span class="line">    <span class="comment">//读入第一条交易记录，并确保有数据可以处理</span></span><br><span class="line">	<span class="keyword">if</span> (std::cin &gt;&gt; total)</span><br><span class="line">	&#123;</span><br><span class="line">		Sales_item trans;<span class="comment">//保存和的变量</span></span><br><span class="line">        <span class="comment">//读入并处理剩余交易记录</span></span><br><span class="line">		<span class="keyword">while</span> (std::cin &gt;&gt; trans)</span><br><span class="line">		&#123;<span class="comment">//如果我们仍在处理相同的书</span></span><br><span class="line">			<span class="keyword">if</span> (total.<span class="built_in">isbn</span>() == trans.<span class="built_in">isbn</span>())</span><br><span class="line">				total += trans;<span class="comment">//更新总销售额</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;<span class="comment">//打印前一本书的结果</span></span><br><span class="line">				std::cout &lt;&lt; total &lt;&lt; std::endl;</span><br><span class="line">				total = trans;<span class="comment">//total现在表示下一本书的销售额</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		std::cout &lt;&lt; total &lt;&lt; std::endl;<span class="comment">//打印最后一本书的结果</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		std::cerr &lt;&lt; <span class="string">&quot;No data?!&quot;</span> &lt;&lt; std::endl;<span class="comment">//没有输入！警告读者</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;<span class="comment">//表示失败</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="练习1-23"><a href="#练习1-23" class="headerlink" title="练习1.23"></a>练习1.23</h3><blockquote>
+<p>编写程序，读取多条销售记录，并统计每个 ISBN（每本书）有几条销售记录。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;Sales_item.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_item current ,val;</span><br><span class="line">    <span class="keyword">if</span> (std::cin&gt;&gt;current)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> cnt=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (std::cin&gt;&gt;val)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (current.<span class="built_in">isbn</span>()==val.<span class="built_in">isbn</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                ++cnt;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                std::cout&lt;&lt;current&lt;&lt;<span class="string">&quot; occurs &quot;</span>&lt;&lt; cnt &lt;&lt;<span class="string">&quot; times &quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                current=val;</span><br><span class="line">                cnt =<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       std::cout&lt;&lt;current&lt;&lt;<span class="string">&quot; occurs &quot;</span>&lt;&lt; cnt &lt;&lt;<span class="string">&quot; times &quot;</span>&lt;&lt;std::endl;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="练习1-24"><a href="#练习1-24" class="headerlink" title="练习1.24"></a>练习1.24</h3><blockquote>
+<p>输入表示多个 ISBN 的多条销售记录来测试上一个程序，每个 ISBN 的记录应该聚在一起。</p>
+</blockquote>
+<p><strong>数据取自VisualStudio2012.zip\1\data\book_sales</strong></p>
+<p><img src="http://pic.eastwinters.com/202312171257232.png" alt="练习1.24" title="exercise1_24"></p>
+<h3 id="练习1-25"><a href="#练习1-25" class="headerlink" title="练习1.25"></a>练习1.25</h3><blockquote>
+<p>借助网站上的Sales_item.h头文件，编译并运行本节给出的书店程序。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/03/1/" rel="prev" title="近况总结">
+      <i class="fa fa-chevron-left"></i> 近况总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%8AC-Primer%E3%80%8B%E7%AC%AC%E4%BA%94%E7%89%88%E4%B9%A0%E9%A2%98%E4%B8%AA%E4%BA%BA%E7%AD%94%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">《C++ Primer》第五版习题个人答案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-1"><span class="nav-number">1.1.1.</span> <span class="nav-text">练习1.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-2"><span class="nav-number">1.1.2.</span> <span class="nav-text">练习1.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-3"><span class="nav-number">1.1.3.</span> <span class="nav-text">练习1.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-4"><span class="nav-number">1.1.4.</span> <span class="nav-text">练习1.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-5"><span class="nav-number">1.1.5.</span> <span class="nav-text">练习1.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-6"><span class="nav-number">1.1.6.</span> <span class="nav-text">练习1.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-7"><span class="nav-number">1.1.7.</span> <span class="nav-text">练习1.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-8"><span class="nav-number">1.1.8.</span> <span class="nav-text">练习1.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-9"><span class="nav-number">1.1.9.</span> <span class="nav-text">练习1.9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-10"><span class="nav-number">1.1.10.</span> <span class="nav-text">练习1.10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-11"><span class="nav-number">1.1.11.</span> <span class="nav-text">练习1.11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-12"><span class="nav-number">1.1.12.</span> <span class="nav-text">练习1.12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-13"><span class="nav-number">1.1.13.</span> <span class="nav-text">练习1.13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-14"><span class="nav-number">1.1.14.</span> <span class="nav-text">练习1.14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-15"><span class="nav-number">1.1.15.</span> <span class="nav-text">练习1.15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-16"><span class="nav-number">1.1.16.</span> <span class="nav-text">练习1.16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-17"><span class="nav-number">1.1.17.</span> <span class="nav-text">练习1.17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-18"><span class="nav-number">1.1.18.</span> <span class="nav-text">练习1.18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-19"><span class="nav-number">1.1.19.</span> <span class="nav-text">练习1.19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-20"><span class="nav-number">1.1.20.</span> <span class="nav-text">练习1.20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-21"><span class="nav-number">1.1.21.</span> <span class="nav-text">练习1.21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-22"><span class="nav-number">1.1.22.</span> <span class="nav-text">练习1.22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-23"><span class="nav-number">1.1.23.</span> <span class="nav-text">练习1.23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-24"><span class="nav-number">1.1.24.</span> <span class="nav-text">练习1.24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-25"><span class="nav-number">1.1.25.</span> <span class="nav-text">练习1.25</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="EastWinters"
+      src="http://pic.eastwinters.com/202308201654172.jpg">
+  <p class="site-author-name" itemprop="name">EastWinters</p>
+  <div class="site-description" itemprop="description">西边出现了阳光，这辈子第一次看到了外面的世界。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eastwinters" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eastwinters" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/eastwinterliao@gmail.com" title="E-Mail → eastwinterliao@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+      <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+    <!--网易云-->   
+    <meting-js
+      server="netease"
+      id="1928712"
+	  type="playlist" 
+	  mini="false"
+      fixed="false"
+      list-folded="true"
+      autoplay="false"
+      volume="0.4"
+      theme="#3a3a3a"
+      order="random"
+	  loop="all"
+      preload="auto"
+      mutex="true">
+    </meting-js>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <!--<span class="with-love">
+    <i class="fa fa-heart"></i>-->
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>
