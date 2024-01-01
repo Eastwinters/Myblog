@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="《C++ Primer》第五版习题个人答案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ Primer personal answer chapter02">
+<meta property="og:url" content="http://example.com/2024/01/01/C++primer02/index.html">
+<meta property="og:site_name" content="東冬的个人博客">
+<meta property="og:description" content="《C++ Primer》第五版习题个人答案">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pic.eastwinters.com/202312210732974.png">
+<meta property="og:image" content="http://pic.eastwinters.com/202312272011225.png">
+<meta property="og:image" content="http://pic.eastwinters.com/202312301438875.png">
+<meta property="article:published_time" content="2024-01-01T07:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-01T06:54:49.931Z">
+<meta property="article:author" content="EastWinters">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pic.eastwinters.com/202312210732974.png">
+
+<link rel="canonical" href="http://example.com/2024/01/01/C++primer02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++ Primer personal answer chapter02 | 東冬的个人博客</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5a08547d8727bdbe008d68b9f8ff7971";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">東冬的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">A personal blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/01/C++primer02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://pic.eastwinters.com/202308201654172.jpg">
+      <meta itemprop="name" content="EastWinters">
+      <meta itemprop="description" content="西边出现了阳光，这辈子第一次看到了外面的世界。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="東冬的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++ Primer personal answer chapter02
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-01 15:00:00 / 修改时间：14:54:49" itemprop="dateCreated datePublished" datetime="2024-01-01T15:00:00+08:00">2024-01-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="《C-Primer》第五版习题个人答案"><a href="#《C-Primer》第五版习题个人答案" class="headerlink" title="《C++ Primer》第五版习题个人答案"></a>《C++ Primer》第五版习题个人答案</h1><span id="more"></span>
+<h2 id="练习2-1"><a href="#练习2-1" class="headerlink" title="练习2.1"></a>练习2.1</h2><blockquote>
+<p>类型 int、long、long long 和 short 的区别是什么？无符号类型和带符号类型的区别是什么？float 和 double的区别是什么？</p>
+</blockquote>
+<p>int、long、long long和short是整数类型，它们的区别在于占用的存储空间和取值范围的大小。以下是各个类型的最小尺寸：<code>short</code> 和 <code>int</code> 至少16位，<code>long</code> 至少32位，<code>long long</code> 至少64位。<br><code>float</code>和<code>double</code>是浮点数类型，区别在于精度和取值范围的大小。<code>float</code>是单精度浮点数类型，通常占用4个字节（32位）的存储空间。<code>double</code>是双精度浮点数类型，通常占用8个字节（64位）的存储空间。</p>
+<h2 id="练习2-2"><a href="#练习2-2" class="headerlink" title="练习2.2"></a>练习2.2</h2><blockquote>
+<p>计算按揭贷款时，对于利率、本金和付款分别应选择何种数据类型？说明你的理由。</p>
+</blockquote>
+<p>利率：利率通常是一个小数，例如3.5%可以表示为0.035。在计算利息时，我们需要进行乘法和除法运算，因此选择浮点数类型更合适。可以选择使用<code>float</code>或<code>double</code>类型来表示利率，具体选择哪种类型取决于所需的精度和范围;<br>本金：本金是贷款的原始金额，通常是一个整数或浮点数。在计算本金时，我们通常只需要进行加法和减法运算，因此选择整数类型或浮点数类型都可以。如果贷款金额较大，可以选择使用<code>long long</code>或<code>double</code>类型;<br>付款：付款是按揭贷款的每期还款金额，通常是一个固定的数值。付款金额可以是整数或浮点数，取决于贷款的具体情况。</p>
+<h2 id="练习2-3"><a href="#练习2-3" class="headerlink" title="练习2.3"></a>练习2.3</h2><blockquote>
+<p>读程序写结果。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> u = <span class="number">10</span>, u2 = <span class="number">42</span>;</span><br><span class="line">std::cout &lt;&lt; u2 - u &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; u - u2 &lt;&lt; std::endl;</span><br><span class="line"><span class="type">int</span> i = <span class="number">10</span>, i2 = <span class="number">42</span>;</span><br><span class="line">std::cout &lt;&lt; i2 - i &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; i - i2 &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; i - u &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; u - i &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">32</span><br><span class="line">4294967264</span><br><span class="line">32</span><br><span class="line">-32</span><br><span class="line">0</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-4"><a href="#练习2-4" class="headerlink" title="练习2.4"></a>练习2.4</h2><blockquote>
+<p>编写程序检查你的估计是否正确，如果不正确，请仔细研读本节直到弄明白问题所在。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">unsigned</span> u = <span class="number">10</span>, u2 = <span class="number">42</span>;</span><br><span class="line">std::cout &lt;&lt; u2 - u &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; u - u2 &lt;&lt; std::endl;</span><br><span class="line"><span class="type">int</span> i = <span class="number">10</span>, i2 = <span class="number">42</span>;</span><br><span class="line">std::cout &lt;&lt; i2 - i &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; i - i2 &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; i - u &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; u - i &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://pic.eastwinters.com/202312210732974.png" alt="exercise2.4"></p>
+<h2 id="练习2-5"><a href="#练习2-5" class="headerlink" title="练习2.5"></a>练习2.5</h2><blockquote>
+<p>指出下述字面值的数据类型并说明每一组内几种字面值的区别：</p>
+</blockquote>
+<ul>
+<li>(a) ‘a’, L’a’, “a”, L”a”</li>
+<li>(b) 10, 10u, 10L, 10uL, 012, 0xC</li>
+<li>(c) 3.14, 3.14f, 3.14L</li>
+<li>(d) 10, 10u, 10., 10e-2</li>
+</ul>
+<p>(a): 字符字面值,类型为<code>char</code>;宽字符字面值,类型为<code>wchar_t</code>;字符串字面值,类型为<code>const char[]</code>；宽字符串字面值,类型为<code>const wchar_t[]</code>。</p>
+<p>(b): 整型字面值，默认为<code>int</code>类型;无符号整型字面值，类型为<code>unsigned int</code>;长整型字面值，类型为<code>long</code>;无符号长整型字面值，类型为<code>unsigned long</code>;八进制整型字面值，类型为<code>int</code>;十六进制整型字面值，类型为<code>int</code>。</p>
+<p>(c): 浮点型字面值，默认为<code>double</code>类型; 单精度浮点型字面值，类型为<code>float</code>;长双精度浮点型字面值，类型为<code>long double</code>。</p>
+<p>(d): 整型字面值，默认为 <code>int</code>类型;无符号整型字面值，类型为<code>unsigned int</code>;浮点型字面值，默认为<code>double</code>类型;科学计数法表示的浮点型字面值，默认为<code>double</code>类型。</p>
+<h2 id="练习2-6"><a href="#练习2-6" class="headerlink" title="练习2.6"></a>练习2.6</h2><blockquote>
+<p>下面两组定义是否有区别，如果有，请叙述之：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> month = <span class="number">9</span>, day = <span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> month = <span class="number">09</span>, day = <span class="number">07</span>;</span><br></pre></td></tr></table></figure>
+
+<p>第一行定义的是十进制整型。<br>以0为开头的整数常量被解释为八进制数，但是八进制只包含数字0到7，所以09是非法的八进制数。</p>
+<h2 id="练习2-7"><a href="#练习2-7" class="headerlink" title="练习2.7"></a>练习2.7</h2><blockquote>
+<p>下述字面值表示何种含义？它们各自的数据类型是什么？</p>
+</blockquote>
+<ul>
+<li>(a) “Who goes with F\145rgus?\012”</li>
+<li>(b) 3.14e1L</li>
+<li>(c) 1024f</li>
+<li>(d) 3.14L</li>
+</ul>
+<p>(a): Who goes with Fergus?(换行)，string 类型</p>
+<p>(b): long double</p>
+<p>(c): 非法，整型后不可加f</p>
+<p>(d): long double</p>
+<h2 id="练习2-8"><a href="#练习2-8" class="headerlink" title="练习2.8"></a>练习2.8</h2><blockquote>
+<p>请利用转义序列编写一段程序，要求先输出 2M，然后转到新一行。修改程序使其先输出 2，然后输出制表符，再输出 M，最后转到新一行。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;2\115\n&quot;</span>;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;2\t\115\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-9"><a href="#练习2-9" class="headerlink" title="练习2.9"></a>练习2.9</h2><blockquote>
+<p>解释下列定义的含义，对于非法的定义，请说明错在何处并将其改正。</p>
+</blockquote>
+<ul>
+<li>(a) std::cin &gt;&gt; int input_value;</li>
+<li>(b) int i &#x3D; { 3.14 };</li>
+<li>(c) double salary &#x3D; wage &#x3D; 9999.99;</li>
+<li>(d) int i &#x3D; 3.14;</li>
+</ul>
+<p>(a):非法，<code>std::cin</code>是输入流对象，<code>&gt;&gt;</code>运算符用于读取数据并存储到变量中，不能将变量直接输入，应该先初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> input_value = <span class="number">0</span>;</span><br><span class="line">std::cin &gt;&gt; input_value;</span><br></pre></td></tr></table></figure>
+
+<p>(b): 合法，但会导致精度丢失。用列表初始化内置类型的变量时，如果存在丢失信息的风险，则编译器将报错。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> i = &#123; <span class="number">3.14</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>(c): 非法，不能将未定义变量<code>wage</code>的值赋给变量<code>salary</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> wage = <span class="number">9999.99</span>;</span><br><span class="line"><span class="type">double</span> salary = wage;</span><br></pre></td></tr></table></figure>
+
+<p>(d): 合法，但会导致精度丢失。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> i = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-10"><a href="#练习2-10" class="headerlink" title="练习2.10"></a>练习2.10</h2><blockquote>
+<p>下列变量的初值分别是什么？</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">std::string global_str;</span><br><span class="line"><span class="type">int</span> global_int;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> local_int;</span><br><span class="line">    std::string local_str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在C++中，全局变量和静态变量会被默认初始化为它们的零值，而局部变量（包括函数内部定义的变量）不会被默认初始化，它们的值是未定义的。<br><code>global_int</code> 作为全局变量的<code>int</code>类型，所以初值为 0 。<br><code>local_int</code> 是局部变量并且没有初始化，它的初值是未定义的（作用域仅限于main()内部）。<br><code>global_str</code> 和 <code>local_str</code> 作为全局变量的<code>std::string</code>类型，该对象定义了默认的初始化方式，即初始化为空字符串。 </p>
+<h2 id="练习2-11"><a href="#练习2-11" class="headerlink" title="练习2.11"></a>练习2.11</h2><blockquote>
+<p>指出下面的语句是声明还是定义：</p>
+</blockquote>
+<ul>
+<li>(a) extern int ix &#x3D; 1024;</li>
+<li>(b) int iy;</li>
+<li>(c) extern int iz;</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(a): 定义</span><br><span class="line">(b): 声明并定义</span><br><span class="line">(c): 声明</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-12"><a href="#练习2-12" class="headerlink" title="练习2.12"></a>练习2.12</h2><blockquote>
+<p>请指出下面的名字中哪些是非法的？</p>
+</blockquote>
+<ul>
+<li>(a) int double &#x3D; 3.14;</li>
+<li>(b) int _;</li>
+<li>(c) int catch-22;</li>
+<li>(d) int 1_or_2 &#x3D; 1;</li>
+<li>(e) double Double &#x3D; 3.14;</li>
+</ul>
+<p><code>(a)</code> double 是C++中的关键字，不能用作变量名。 <code>(c)</code>变量名中不能包含连字符（减号），只能使用字母、数字和下划线。 <code>(d)</code> 变量名不能以数字开头。<br>其他合法。</p>
+<h2 id="练习2-13"><a href="#练习2-13" class="headerlink" title="练习2.13"></a>练习2.13</h2><blockquote>
+<p>下面程序中 j 的值是多少？</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">100</span>;</span><br><span class="line">    <span class="type">int</span> j = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>100</code>。</p>
+<h2 id="练习2-14"><a href="#练习2-14" class="headerlink" title="练习2.14"></a>练习2.14</h2><blockquote>
+<p>下面的程序合法吗？如果合法，它将输出什么？</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">100</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i != <span class="number">10</span>; ++i)</span><br><span class="line">    sum += i;</span><br><span class="line">std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; sum &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>合法。最后<code>i</code>为全局变量输出，<code>for</code>循环为一到九相加，输出是 <code>100 45</code> 。</p>
+<h2 id="练习2-15"><a href="#练习2-15" class="headerlink" title="练习2.15"></a>练习2.15</h2><blockquote>
+<p>下面的哪个定义是不合法的？为什么？</p>
+</blockquote>
+<ul>
+<li>(a) int ival &#x3D; 1.01;</li>
+<li>(b) int &amp;rval1 &#x3D; 1.01;</li>
+<li>(c) int &amp;rval2 &#x3D; ival;</li>
+<li>(d) int &rval3;</li>
+</ul>
+<p><code>(b)</code> 和 <code>(d)</code> 不合法，<code>(b)</code> 引用类型必须绑定到一个对象上，而不能绑定到字面值上。字面值 1.01 是一个临时值，无法被引用。<code>(d)</code> 引用类型在定义时必须初始化，必须绑定到一个对象。</p>
+<h2 id="练习2-16"><a href="#练习2-16" class="headerlink" title="练习2.16"></a>练习2.16</h2><blockquote>
+<p>考察下面的所有赋值然后回答：哪些赋值是不合法的？为什么？哪些赋值是合法的？它们执行了哪些操作？</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int i = 0, &amp;r1 = i; double d = 0, &amp;r2 = d;</span><br><span class="line">- (a) r2 = 3.14159;</span><br><span class="line">- (b) r2 = r1;</span><br><span class="line">- (c) i = r2;</span><br><span class="line">- (d) r1 = d;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a): 合法。给 d 赋值为 3.14159。</span><br><span class="line">(b): 合法。会执行自动转换（int-&gt;double）。</span><br><span class="line">(c): 合法。会发生小数截取。</span><br><span class="line">(d): 合法。会发生小数截取。</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-17"><a href="#练习2-17" class="headerlink" title="练习2.17"></a>练习2.17</h2><blockquote>
+<p>执行下面的代码段将输出什么结果？</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i, &amp;ri = i;</span><br><span class="line">i = <span class="number">5</span>; ri = <span class="number">10</span>;</span><br><span class="line">std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; ri &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10, 10</span><br></pre></td></tr></table></figure>
+<p>由于 <code>ri</code> 是 <code>i</code> 的引用，将 <code>ri</code> 的值设置为 10 实际上就是将 <code>i</code> 的值设置为 10。<br>由于 <code>i</code> 和 <code>ri</code> 引用同一个对象，它们的值都是 10。</p>
+<h2 id="练习2-18"><a href="#练习2-18" class="headerlink" title="练习2.18"></a>练习2.18</h2><blockquote>
+<p>编写代码分别改变指针的值以及指针所指对象的值。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">42</span>;</span><br><span class="line">    <span class="type">int</span> *ptr = &amp;i;  <span class="comment">// ptr指向i的地址</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> j = <span class="number">10</span>;</span><br><span class="line">    ptr = &amp;j;  <span class="comment">// 更改ptr的值，使其指向j的地址</span></span><br><span class="line"></span><br><span class="line">    *ptr = <span class="number">21</span>;  <span class="comment">// 修改ptr所指对象的值为21，即修改j的值为21</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; *ptr &lt;&lt; std::endl;  <span class="comment">// 输出21</span></span><br><span class="line">    std::cout &lt;&lt; j &lt;&lt; std::endl;  <span class="comment">// 输出21</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-19"><a href="#练习2-19" class="headerlink" title="练习2.19"></a>练习2.19</h2><blockquote>
+<p>说明指针和引用的主要区别</p>
+</blockquote>
+<ol>
+<li>引用是另一个对象的别名本身并非一个对象，而指针本身就是一个对象。</li>
+<li>引用必须初始化，并且一旦定义了引用就无法再绑定到其他另外的对象，之后每次引用都是访问它最初绑定的那个对象。而指针无须在定义时赋初值，也可以重新赋值让其指向其他对象。</li>
+</ol>
+<h2 id="练习2-20"><a href="#练习2-20" class="headerlink" title="练习2.20"></a>练习2.20</h2><blockquote>
+<p>请叙述下面这段代码的作用。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="type">int</span> *p1 = &amp;i; </span><br><span class="line">*p1 = *p1 * *p1;</span><br></pre></td></tr></table></figure>
+
+<p>让指针 <code>pi</code> 指向 <code>i</code>，然后将 <code>i</code> 的值重新赋值为 42 * 42 (1764)。</p>
+<h2 id="练习2-21"><a href="#练习2-21" class="headerlink" title="练习2.21"></a>练习2.21</h2><blockquote>
+<p>请解释下述定义。在这些定义中有非法的吗？如果有，为什么？</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int i = 0;</span><br><span class="line">(a) double* dp = &amp;i;</span><br><span class="line">(b) int *ip = i;</span><br><span class="line">(c) int *p = &amp;i;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(a): 非法。int型对象不能赋给double型指针 。</span><br><span class="line">(b): 非法。不能直接将 `int` 变量赋给指针。</span><br><span class="line">(c): 合法。</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-22"><a href="#练习2-22" class="headerlink" title="练习2.22"></a>练习2.22</h2><blockquote>
+<p>假设 p 是一个 int 型指针，请说明下述代码的含义。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (p) <span class="comment">// ...</span></span><br><span class="line"><span class="keyword">if</span> (*p) <span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p><code>if (p) // ...</code>  这个条件语句检查指针 <code>p</code>是否为非空指针。如果 <code>p</code>的值不为零（即指针指向一个有效的内存地址），条件为真，执行 <code>if</code> 语句块中的代码。如果 <code>p</code> 的值为零（即指针为空指针），条件为假，跳过 <code>if</code> 语句块中的代码。<br><code>if (*p) // ...</code> 这个条件语句检查指针 <code>p</code> 所指的对象的值是否为非零。通过解引用指针 <code>p</code>，可以访问指针所指的对象。如果解引用后的值不为零，条件为真，执行 <code>if</code> 语句块中的代码。如果解引用后的值为零，条件为假，跳过 <code>if</code> 语句块中的代码。</p>
+<h2 id="练习2-23"><a href="#练习2-23" class="headerlink" title="练习2.23"></a>练习2.23</h2><blockquote>
+<p>给定指针 p，你能知道它是否指向了一个合法的对象吗？如果能，叙述判断的思路；如果不能，也请说明原因。</p>
+</blockquote>
+<p>不能。只有在运行时，通过访问指针 p 所指的内存地址，才能确定它是否指向了一个合法的对象。<br>在C++中，指针的合法性是一个相对的概念。一个指针被认为是合法的，如果它指向了一个已分配的内存块，或者指向了一个有效的对象。然而，即使指针指向了一个已分配的内存块，也不能保证该内存块包含了一个有效的对象。</p>
+<h2 id="练习2-24"><a href="#练习2-24" class="headerlink" title="练习2.24"></a>练习2.24</h2><blockquote>
+<p>在下面这段代码中为什么 p 合法而 lp 非法？</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="type">void</span> *p = &amp;i;</span><br><span class="line"><span class="type">long</span> *lp = &amp;i;</span><br></pre></td></tr></table></figure>
+
+<p><code>void *</code> 可以指向任何类型的对象。<code>long</code>指针类型与<code>int</code>对象不匹配。</p>
+<h2 id="练习2-25"><a href="#练习2-25" class="headerlink" title="练习2.25"></a>练习2.25</h2><blockquote>
+<p>说明下列变量的类型和值。</p>
+</blockquote>
+<ul>
+<li>(a) int* ip, i, &amp;r &#x3D; i;</li>
+<li>(b) int i, *ip &#x3D; 0;</li>
+<li>(c) int* ip, ip2;</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(a): ip 是一个int指针, i 是int类型, r 是 i 的引用。</span><br><span class="line">(b): i 是int类型, ip 是空指针。</span><br><span class="line">(c): ip 是一个int的指针, ip2 是int类型。</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-26"><a href="#练习2-26" class="headerlink" title="练习2.26"></a>练习2.26</h2><blockquote>
+<p>下面哪些语句是合法的？如果不合法，请说明为什么？</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> buf;      </span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;        </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> sz = cnt; </span><br><span class="line">++cnt; ++sz;        </span><br></pre></td></tr></table></figure>
+<p>(a):不合法，const 对象必须初始化。<br>(b):合法。<br>(c):合法。<br>(d):不合法, const 对象不能被改变。</p>
+<h2 id="练习2-27"><a href="#练习2-27" class="headerlink" title="练习2.27"></a>练习2.27</h2><blockquote>
+<p>下面的哪些初始化是合法的？请说明原因。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a) int i = -1, &amp;r = 0;         </span><br><span class="line">(b) int *const p2 = &amp;i2;        </span><br><span class="line">(c) const int i = -1, &amp;r = 0;   </span><br><span class="line">(d) const int *const p3 = &amp;i2;  </span><br><span class="line">(e) const int *p1 = &amp;i2;        </span><br><span class="line">(f) const int &amp;const r2;        </span><br><span class="line">(g) const int i2 = i, &amp;r = i;  </span><br></pre></td></tr></table></figure>
+<p>(a)不合法,因为 <code>&amp;r</code> 是一个引用，引用必须绑定到一个对象上，而不能绑定到一个字面值上。<br>(f)不合法,因为引用本身就是一个常量，不需要额外的 const 修饰符。<br>(b), (c), (d), (e), (g) 这些初始化是合法的。</p>
+<h2 id="练习2-28"><a href="#练习2-28" class="headerlink" title="练习2.28"></a>练习2.28</h2><blockquote>
+<p>说明下面的这些定义是什么意思，挑出其中不合法的。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(a) int i, *const cp;       </span><br><span class="line">(b) int *p1, *const p2;     </span><br><span class="line">(c) const int ic, &amp;r = ic; </span><br><span class="line">(d) const int *const p3;    </span><br><span class="line">(e) const int *p;          </span><br></pre></td></tr></table></figure>
+<p>(a)(b)(d)中的常量指针都没有初始化，是不合法的；(c)中引用变量<code>r</code>需要初始化；(e)是合法的。在定义指针变量时，如果没有提供初始值，指针变量会被默认初始化为 <code>nullptr</code>，表示它当前不指向任何有效的内存地址。</p>
+<h2 id="练习2-29"><a href="#练习2-29" class="headerlink" title="练习2.29"></a>练习2.29</h2><blockquote>
+<p>假设已有上一个练习中定义的那些变量，则下面的哪些语句是合法的？请说明原因。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(a) i = ic;     </span><br><span class="line">(b) p1 = p3;    </span><br><span class="line">(c) p1 = &amp;ic;   </span><br><span class="line">(d) p3 = &amp;ic;   </span><br><span class="line">(e) p2 = p1;    </span><br><span class="line">(f) ic = *p3;   </span><br></pre></td></tr></table></figure>
+<p>(a)合法；(b)不合法，不能将指向常量的指针赋值给非常量指针，因为这可能导致通过非常量指针修改常量的值；(c)合法，非常量指针可以指向常量对象，但不能通过该指针修改常量对象的值；(d)不合法，不能改变常量指针的指向；(e)不合法，常量指针指针一旦被初始化，就不能再改变它所指向的地址；(f)不合法，不能修改常量的值。</p>
+<h2 id="练习2-30"><a href="#练习2-30" class="headerlink" title="练习2.30"></a>练习2.30</h2><blockquote>
+<p>对于下面的这些语句，请说明对象被声明成了顶层const还是底层const？</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> v2 = <span class="number">0</span>; <span class="type">int</span> v1 = v2;</span><br><span class="line"><span class="type">int</span> *p1 = &amp;v1, &amp;r1 = v1;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p2 = &amp;v2, *<span class="type">const</span> p3 = &amp;i, &amp;r2 = v2;</span><br></pre></td></tr></table></figure>
+
+<p>v2 是顶层const；v1 没有被声明为const，它是一个非常量；p1 和 r1 都没有被声明为const，它们是非常量指针；p2 是底层const；p3 既是顶层const又是底层const(靠右的const是顶层const，靠左的是底层const)；r2 是底层const。</p>
+<h2 id="练习2-31"><a href="#练习2-31" class="headerlink" title="练习2.31"></a>练习2.31</h2><blockquote>
+<p>假设已有上一个练习中所做的那些声明，则下面的哪些语句是合法的？请说明顶层const和底层const在每个例子中有何体现。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">r1 = v2; <span class="comment">// 合法, 顶层const在拷贝时不受影响</span></span><br><span class="line">p1 = p2; <span class="comment">// 不合法, p2 是底层const，如果要拷贝必须要求 p1 也是底层const</span></span><br><span class="line">p2 = p1; <span class="comment">// 合法, int* 可以转换成const int*</span></span><br><span class="line">p1 = p3; <span class="comment">// 不合法, p3 是一个底层const，p1 是非常量指针</span></span><br><span class="line">p2 = p3; <span class="comment">// 合法, p2 和 p3 都是底层const，拷贝时忽略掉顶层const</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-32"><a href="#练习2-32" class="headerlink" title="练习2.32"></a>练习2.32</h2><blockquote>
+<p>下面的代码是否合法？如果非法，请设法将其修改正确。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int null = 0, *p = null;</span><br></pre></td></tr></table></figure>
+<p>非法，将一个整数值直接赋给指针是不允许的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int null = 0, *p = &amp;null;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-33"><a href="#练习2-33" class="headerlink" title="练习2.33"></a>练习2.33</h2><blockquote>
+<p>利用本节定义的变量，判断下列语句的运行结果。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">42</span>; <span class="comment">// 合法</span></span><br><span class="line">b=<span class="number">42</span>; <span class="comment">// 合法</span></span><br><span class="line">c=<span class="number">42</span>; <span class="comment">// 合法</span></span><br><span class="line">d=<span class="number">42</span>; <span class="comment">// d 是一个 int *,所以语句非法，指针指向地址</span></span><br><span class="line">e=<span class="number">42</span>; <span class="comment">// e 是一个 const int *, 所以语句非法</span></span><br><span class="line">g=<span class="number">42</span>; <span class="comment">// 可以为常量引用绑定字面值，但是g 是一个 const int 的引用，引用都是底层const，所以不能被赋值</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-34"><a href="#练习2-34" class="headerlink" title="练习2.34"></a>练习2.34</h2><blockquote>
+<p>基于上一个练习中的变量和语句编写一段程序，输出赋值前后变量的内容，你刚才的推断正确吗？如果不对，请反复研读本节的示例直到你明白错在何处为止。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i=<span class="number">0</span>,&amp;r=i;</span><br><span class="line">    <span class="keyword">auto</span> a=r;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> ci=i,&amp;cr=ci;</span><br><span class="line">    <span class="keyword">auto</span> b=ci;</span><br><span class="line">    <span class="keyword">auto</span> c=cr;</span><br><span class="line">    <span class="keyword">auto</span> d=&amp;i;</span><br><span class="line">    <span class="keyword">auto</span> e=&amp;ci;</span><br><span class="line">    <span class="keyword">auto</span> &amp;g=ci;</span><br><span class="line">    a=<span class="number">42</span>,b=<span class="number">42</span>,c=<span class="number">42</span>;</span><br><span class="line">    d=<span class="number">42</span>,e=<span class="number">42</span>,g=<span class="number">42</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>报错<br><img src="http://pic.eastwinters.com/202312272011225.png" alt="exercise2.34" title="error"></p>
+<h2 id="练习2-35"><a href="#练习2-35" class="headerlink" title="练习2.35"></a>练习2.35</h2><blockquote>
+<p>判断下列定义推断出的类型是什么，然后编写程序进行验证。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">auto</span> j = i; <span class="type">const</span> <span class="keyword">auto</span> &amp;k = i; <span class="keyword">auto</span> *p = &amp;i; </span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> j2 = i, &amp;k2 = i;</span><br></pre></td></tr></table></figure>
+
+<p>j:int，k:const int的引用，p:const int *，j2:const int，k2:const int 的引用。</p>
+<h2 id="练习2-36"><a href="#练习2-36" class="headerlink" title="练习2.36"></a>练习2.36</h2><blockquote>
+<p>关于下面的代码，请指出每一个变量的类型以及程序结束时它们各自的值。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;</span><br><span class="line"><span class="keyword">decltype</span>((b)) d = a;</span><br><span class="line">++c;</span><br><span class="line">++d;</span><br></pre></td></tr></table></figure>
+
+<p>a,b,c 是 int;d是int &amp;;程序结束时，a&#x3D;4,b&#x3D;4,c&#x3D;4,d&#x3D;4。(d 引用的是 a，所以 a 的值增加 1，变为 4<br>d 的值也是 4，因为它是 a 的引用)</p>
+<h2 id="练习2-37"><a href="#练习2-37" class="headerlink" title="练习2.37"></a>练习2.37</h2><blockquote>
+<p>赋值是会产生引用的一类典型表达式，引用的类型就是左值的类型。也就是说，如果 i 是 int，则表达式 i&#x3D;x 的类型是 int&amp;。根据这一特点，请指出下面的代码中每一个变量的类型和值。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;</span><br><span class="line"><span class="keyword">decltype</span>(a = b) d = a;</span><br></pre></td></tr></table></figure>
+
+<p>a,b,c是int,d是int&amp;;a&#x3D;3,b&#x3D;4,c&#x3D;3,d&#x3D;3。</p>
+<h2 id="练习2-38"><a href="#练习2-38" class="headerlink" title="练习2.38"></a>练习2.38</h2><blockquote>
+<p>说明由decltype 指定类型和由auto指定类型有何区别。请举一个例子，decltype指定的类型与auto指定的类型一样；再举一个例子，decltype指定的类型与auto指定的类型不一样。</p>
+</blockquote>
+<p>decltype 推导出的类型可以是表达式的类型，而 auto 推导出的类型必须是初始化表达式的类型<br>decltype 处理顶层const和引用的方式与 auto不同，decltype会将顶层const和引用保留起来。<br>指定类型一样的情况：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">decltype</span>(x) y = x;  <span class="comment">// y 的类型为 int，与 auto 推导出的类型相同</span></span><br><span class="line"><span class="keyword">auto</span> z = x;         <span class="comment">// z 的类型为 int，与 decltype 推导出的类型相同</span></span><br></pre></td></tr></table></figure>
+<p>指定类型不一样的情况：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">decltype</span>(x) y = x;  <span class="comment">// y 的类型为 const int，decltype 保留了顶层 const</span></span><br><span class="line"><span class="keyword">auto</span> z = x;         <span class="comment">// z 的类型为 int，auto 去掉了顶层 const</span></span><br></pre></td></tr></table></figure>
+<h2 id="练习2-39"><a href="#练习2-39" class="headerlink" title="练习2.39"></a>练习2.39</h2><blockquote>
+<p>编译下面的程序观察其运行结果，注意，如果忘记写类定义体后面的分号会发生什么情况？记录下相关的信息，以后可能会有用。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Foo</span> &#123; <span class="comment">/* 此处为空  */</span> &#125; <span class="comment">// 注意：没有分号</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://pic.eastwinters.com/202312301438875.png" alt="exercise2.39" title="error"></p>
+<h2 id="练习2-40"><a href="#练习2-40" class="headerlink" title="练习2.40"></a>练习2.40</h2><blockquote>
+<p>根据自己的理解写出 Sales_data 类，最好与书中的例子有所区别。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Sale_data</span></span><br><span class="line">&#123;</span><br><span class="line">    std::string bookNo;</span><br><span class="line">    std::string bookName;</span><br><span class="line">    <span class="type">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="type">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">double</span> price = <span class="number">0.0</span>;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-41"><a href="#练习2-41" class="headerlink" title="练习2.41"></a>练习2.41</h2><blockquote>
+<p>使用你自己的Sale_data类重写1.5.1节（第20页）、1.5.2节（第21页）和1.6节（第22页）的练习。眼下先把Sales_data类的定义和main函数放在一个文件里。</p>
+</blockquote>
+<p>####1.5.1<br>以下程序用于计算两个相同IBSN的<code>Sales_data</code>对象，输出他们的和。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Sales_data</span></span><br><span class="line">&#123;</span><br><span class="line">    std::string bookNo;</span><br><span class="line">    <span class="type">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="type">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">double</span> price = <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_data data1,data2;</span><br><span class="line">    <span class="type">double</span> price=<span class="number">0</span>;</span><br><span class="line">    std::cin&gt;&gt;data1.bookNo&gt;&gt;data1.units_sold&gt;&gt;price;</span><br><span class="line">    data1.revenue=data1.units_sold*price;</span><br><span class="line">    std::cin&gt;&gt;data2.bookNo&gt;&gt;data2.units_sold&gt;&gt;price;</span><br><span class="line">    data2.revenue=data2.units_sold*price;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (data1.bookNo==data2.bookNo)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">unsigned</span> totalCnt=data1.units_sold+data2.units_sold;</span><br><span class="line">        <span class="type">double</span> totalRevenue=data1.revenue+data2.revenue;</span><br><span class="line">        std::cout&lt;&lt;data1.bookNo&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;totalCnt&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;totalRevenue&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr&lt;&lt;<span class="string">&quot;Data must refer to the same ISBN&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>####1.5.2<br>和上一问程序相同，代码实现了输入多条销售记录并统计每个ISBN（每本书）有几条记录。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Sales_data</span></span><br><span class="line">&#123;</span><br><span class="line">    std::string bookNo;</span><br><span class="line">    <span class="type">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="type">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">double</span> price = <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_data data1,data2;</span><br><span class="line">    <span class="type">double</span> price=<span class="number">0</span>;</span><br><span class="line">    std::cin&gt;&gt;data1.bookNo&gt;&gt;data1.units_sold&gt;&gt;price;</span><br><span class="line">    data1.revenue=data1.units_sold*price;</span><br><span class="line">    std::cin&gt;&gt;data2.bookNo&gt;&gt;data2.units_sold&gt;&gt;price;</span><br><span class="line">    data2.revenue=data2.units_sold*price;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (data1.bookNo==data2.bookNo)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">unsigned</span> totalCnt=data1.units_sold+data2.units_sold;</span><br><span class="line">        <span class="type">double</span> totalRevenue=data1.revenue+data2.revenue;</span><br><span class="line">        std::cout&lt;&lt;data1.bookNo&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;totalCnt&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;totalRevenue&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr&lt;&lt;<span class="string">&quot;Data must refer to the same ISBN&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>####1.6</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Sales_data</span></span><br><span class="line">&#123;</span><br><span class="line">    std::string bookNo;</span><br><span class="line">    <span class="type">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="type">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">double</span> price = <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_data total;</span><br><span class="line">    <span class="type">double</span> totalprice=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (std::cin &gt;&gt; total.bookNo&gt;&gt;total.units_sold&gt;&gt;totalprice)</span><br><span class="line">    &#123;</span><br><span class="line">        total.revenue=total.units_sold*totalprice;</span><br><span class="line">        Sales_data trans;</span><br><span class="line">        <span class="type">double</span> transprice;</span><br><span class="line">        <span class="keyword">while</span> (std::cin&gt;&gt;trans.bookNo&gt;&gt;trans.units_sold&gt;&gt;transprice)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (trans.bookNo==total.bookNo)</span><br><span class="line">            &#123;</span><br><span class="line">                total.units_sold +=trans.units_sold;</span><br><span class="line">                total.revenue +=trans.revenue;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                std::cout&lt;&lt;total.bookNo&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.units_sold&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.revenue&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">                <span class="keyword">if</span> (total.units_sold!=<span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;total.revenue/total.units_sold&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;<span class="string">&quot;(No Sales)&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                total.bookNo=trans.bookNo;</span><br><span class="line">                total.units_sold=trans.units_sold;</span><br><span class="line">                total.revenue=trans.revenue;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        std::cout&lt;&lt;total.bookNo&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.units_sold&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.revenue&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">         <span class="keyword">if</span> (total.units_sold!=<span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;total.revenue/total.units_sold&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;<span class="string">&quot;(No Sales)&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr&lt;&lt;<span class="string">&quot;No Data?!&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-42"><a href="#练习2-42" class="headerlink" title="练习2.42"></a>练习2.42</h2><blockquote>
+<p>根据你自己的理解重写一个Sales_data.h头文件，并以此为基础重做2.6.2节（第67页）的练习。</p>
+</blockquote>
+<p>####ex2_42.h</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> Sales_data_h</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Sales_data_h</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Sales_data</span></span><br><span class="line">&#123;</span><br><span class="line">    std::string bookNo;</span><br><span class="line">    <span class="type">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="type">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">double</span> price = <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>####1.5.1&amp;1.5.2(将结构体用头文件替换即可)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;ex2_42.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_data data1,data2;</span><br><span class="line">    <span class="type">double</span> price=<span class="number">0</span>;</span><br><span class="line">    std::cin&gt;&gt;data1.bookNo&gt;&gt;data1.units_sold&gt;&gt;price;</span><br><span class="line">    data1.revenue=data1.units_sold*price;</span><br><span class="line">    std::cin&gt;&gt;data2.bookNo&gt;&gt;data2.units_sold&gt;&gt;price;</span><br><span class="line">    data2.revenue=data2.units_sold*price;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (data1.bookNo==data2.bookNo)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">unsigned</span> totalCnt=data1.units_sold+data2.units_sold;</span><br><span class="line">        <span class="type">double</span> totalRevenue=data1.revenue+data2.revenue;</span><br><span class="line">        std::cout&lt;&lt;data1.bookNo&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;totalCnt&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;totalRevenue&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr&lt;&lt;<span class="string">&quot;Data must refer to the same ISBN&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####1.6</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;ex2_42.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_data total;</span><br><span class="line">    <span class="type">double</span> totalprice=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (std::cin &gt;&gt; total.bookNo&gt;&gt;total.units_sold&gt;&gt;totalprice)</span><br><span class="line">    &#123;</span><br><span class="line">        total.revenue=total.units_sold*totalprice;</span><br><span class="line">        Sales_data trans;</span><br><span class="line">        <span class="type">double</span> transprice;</span><br><span class="line">        <span class="keyword">while</span> (std::cin&gt;&gt;trans.bookNo&gt;&gt;trans.units_sold&gt;&gt;transprice)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (trans.bookNo==total.bookNo)</span><br><span class="line">            &#123;</span><br><span class="line">                total.units_sold +=trans.units_sold;</span><br><span class="line">                total.revenue +=trans.revenue;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                std::cout&lt;&lt;total.bookNo&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.units_sold&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.revenue&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">                <span class="keyword">if</span> (total.units_sold!=<span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;total.revenue/total.units_sold&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;<span class="string">&quot;(No Sales)&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                total.bookNo=trans.bookNo;</span><br><span class="line">                total.units_sold=trans.units_sold;</span><br><span class="line">                total.revenue=trans.revenue;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        std::cout&lt;&lt;total.bookNo&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.units_sold&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;total.revenue&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">         <span class="keyword">if</span> (total.units_sold!=<span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;total.revenue/total.units_sold&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout&lt;&lt;<span class="string">&quot;(No Sales)&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr&lt;&lt;<span class="string">&quot;No Data?!&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/17/C++primer01/" rel="prev" title="C++ Primer personal answer chapter01">
+      <i class="fa fa-chevron-left"></i> C++ Primer personal answer chapter01
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%8AC-Primer%E3%80%8B%E7%AC%AC%E4%BA%94%E7%89%88%E4%B9%A0%E9%A2%98%E4%B8%AA%E4%BA%BA%E7%AD%94%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">《C++ Primer》第五版习题个人答案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-1"><span class="nav-number">1.1.</span> <span class="nav-text">练习2.1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-2"><span class="nav-number">1.2.</span> <span class="nav-text">练习2.2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-3"><span class="nav-number">1.3.</span> <span class="nav-text">练习2.3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-4"><span class="nav-number">1.4.</span> <span class="nav-text">练习2.4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-5"><span class="nav-number">1.5.</span> <span class="nav-text">练习2.5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-6"><span class="nav-number">1.6.</span> <span class="nav-text">练习2.6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-7"><span class="nav-number">1.7.</span> <span class="nav-text">练习2.7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-8"><span class="nav-number">1.8.</span> <span class="nav-text">练习2.8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-9"><span class="nav-number">1.9.</span> <span class="nav-text">练习2.9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-10"><span class="nav-number">1.10.</span> <span class="nav-text">练习2.10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-11"><span class="nav-number">1.11.</span> <span class="nav-text">练习2.11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-12"><span class="nav-number">1.12.</span> <span class="nav-text">练习2.12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-13"><span class="nav-number">1.13.</span> <span class="nav-text">练习2.13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-14"><span class="nav-number">1.14.</span> <span class="nav-text">练习2.14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-15"><span class="nav-number">1.15.</span> <span class="nav-text">练习2.15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-16"><span class="nav-number">1.16.</span> <span class="nav-text">练习2.16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-17"><span class="nav-number">1.17.</span> <span class="nav-text">练习2.17</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-18"><span class="nav-number">1.18.</span> <span class="nav-text">练习2.18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-19"><span class="nav-number">1.19.</span> <span class="nav-text">练习2.19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-20"><span class="nav-number">1.20.</span> <span class="nav-text">练习2.20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-21"><span class="nav-number">1.21.</span> <span class="nav-text">练习2.21</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-22"><span class="nav-number">1.22.</span> <span class="nav-text">练习2.22</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-23"><span class="nav-number">1.23.</span> <span class="nav-text">练习2.23</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-24"><span class="nav-number">1.24.</span> <span class="nav-text">练习2.24</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-25"><span class="nav-number">1.25.</span> <span class="nav-text">练习2.25</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-26"><span class="nav-number">1.26.</span> <span class="nav-text">练习2.26</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-27"><span class="nav-number">1.27.</span> <span class="nav-text">练习2.27</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-28"><span class="nav-number">1.28.</span> <span class="nav-text">练习2.28</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-29"><span class="nav-number">1.29.</span> <span class="nav-text">练习2.29</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-30"><span class="nav-number">1.30.</span> <span class="nav-text">练习2.30</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-31"><span class="nav-number">1.31.</span> <span class="nav-text">练习2.31</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-32"><span class="nav-number">1.32.</span> <span class="nav-text">练习2.32</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-33"><span class="nav-number">1.33.</span> <span class="nav-text">练习2.33</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-34"><span class="nav-number">1.34.</span> <span class="nav-text">练习2.34</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-35"><span class="nav-number">1.35.</span> <span class="nav-text">练习2.35</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-36"><span class="nav-number">1.36.</span> <span class="nav-text">练习2.36</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-37"><span class="nav-number">1.37.</span> <span class="nav-text">练习2.37</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-38"><span class="nav-number">1.38.</span> <span class="nav-text">练习2.38</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-39"><span class="nav-number">1.39.</span> <span class="nav-text">练习2.39</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-40"><span class="nav-number">1.40.</span> <span class="nav-text">练习2.40</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-41"><span class="nav-number">1.41.</span> <span class="nav-text">练习2.41</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-42"><span class="nav-number">1.42.</span> <span class="nav-text">练习2.42</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="EastWinters"
+      src="http://pic.eastwinters.com/202308201654172.jpg">
+  <p class="site-author-name" itemprop="name">EastWinters</p>
+  <div class="site-description" itemprop="description">西边出现了阳光，这辈子第一次看到了外面的世界。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eastwinters" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eastwinters" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/eastwinterliao@gmail.com" title="E-Mail → eastwinterliao@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+      <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+    <!--网易云-->   
+    <meting-js
+      server="netease"
+      id="1928712"
+	  type="album" 
+	  mini="false"
+      fixed="false"
+      list-folded="true"
+      autoplay="false"
+      volume="0.4"
+      theme="#3a3a3a"
+      order="random"
+	  loop="all"
+      preload="auto"
+      mutex="true">
+    </meting-js>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <!--<span class="with-love">
+    <i class="fa fa-heart"></i>-->
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>
