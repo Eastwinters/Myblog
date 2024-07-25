@@ -30,7 +30,7 @@
 <meta property="og:description" content="《C++ Primer》第五版习题个人答案">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-09T13:28:21.945Z">
-<meta property="article:modified_time" content="2024-07-16T23:46:45.537Z">
+<meta property="article:modified_time" content="2024-07-25T13:47:50.060Z">
 <meta property="article:author" content="EastWinters">
 <meta name="twitter:card" content="summary">
 
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-17 07:46:45" itemprop="dateModified" datetime="2024-07-17T07:46:45+08:00">2024-07-17</time>
+                <time title="修改时间：2024-07-25 21:47:50" itemprop="dateModified" datetime="2024-07-25T21:47:50+08:00">2024-07-25</time>
               </span>
 
           
@@ -288,10 +288,10 @@
 <p><code>getPtr() != 0</code> 会先执行，返回一个布尔值（<code>true</code> 或 <code>false</code>）。然后将这个布尔值赋给 <code>p</code>，这意味着 <code>p</code> 最终会变成 <code>true</code> 或 <code>false</code>，而不是 <code>getPtr()</code> 的返回值。<br>这里将 <code>1024</code> 赋值给 <code>i</code>，并且由于赋值表达式的值是 <code>1024</code>，因此条件始终为 <code>true</code>，因为 <code>1024</code> 是一个非零值。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (p = (<span class="built_in">getPtr</span>()) != <span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> (i == <span class="number">1024</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="练习4-17"><a href="#练习4-17" class="headerlink" title="练习4.17"></a>练习4.17</h2><blockquote>
-<p>说明前置递增运算符和后置递增运算符的区别。</p>
+<p>说明前置递增运算符和后置递增运算符的区别。<br>前置版本将对象本身作为左值返回，后置版本则将对象原始值的副本作为右值返回。</p>
 </blockquote>
 <h2 id="练习4-18"><a href="#练习4-18" class="headerlink" title="练习4.18"></a>练习4.18</h2><blockquote>
-<p>如果132页那个输出vector对象元素的while循环使用前置递增运算符，将得到什么结果？</p>
+<p>如果132页那个输出vector对象元素的while循环使用前置递增运算符，将得到什么结果？<br>第一次解引用是第二个地址，跳过了第一个地址，且最后对<code>v.end()</code>取值。</p>
 </blockquote>
 <h2 id="练习4-19"><a href="#练习4-19" class="headerlink" title="练习4.19"></a>练习4.19</h2><blockquote>
 <p>假设 ptr 的类型是指向 int 的指针、vec 的类型是vector<int>、ival 的类型是int，说明下面的表达式是何含义？如果有表达式不正确，为什么？应该如何修改？</p>
